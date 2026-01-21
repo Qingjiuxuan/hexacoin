@@ -1,28 +1,70 @@
 import React from 'react';
 import { Cpu, Globe, Smartphone, Languages } from 'lucide-react';
+import { Language } from '../types';
 
-export const CoreServices: React.FC = () => {
-  const benefits = [
-    {
-      icon: <Cpu className="w-6 h-6 text-hex-gold" />,
-      title: "AI 构建引擎",
-      desc: "摒弃传统模板堆砌，采用 AI 驱动的自动化逻辑，确保代码结构严谨、运行高效。"
+interface CoreServicesProps {
+  lang: Language;
+}
+
+export const CoreServices: React.FC<CoreServicesProps> = ({ lang }) => {
+  const content = {
+    en: {
+      title: "Core Services",
+      subtitle: "Rapid Website Construction Protocol",
+      description: "HEX platform embeds an advanced AI Build Engine that deeply analyzes your project parameters to automatically write and optimize frontend code. No programming skills required, no expensive servers needed.",
+      benefits: [
+        {
+          title: "AI Build Engine",
+          desc: "AI-driven logic ensures rigorous code structure and efficient runtime, ditching traditional templates."
+        },
+        {
+          title: "Global CDN Distribution",
+          desc: "Distributed node deployment delivers content to global edge nodes for millisecond-level loading."
+        },
+        {
+          title: "Perfect Multi-Device Adaption",
+          desc: "Deeply optimized responsive framework supporting iOS, Android, and PC browsers perfectly."
+        },
+        {
+          title: "Bilingual Adaptive",
+          desc: "Built-in EN/CN language switching engine to help projects seamlessly enter the international market."
+        }
+      ],
+      status: "Status: Online",
+      uptime: "Stable Running"
     },
-    {
-      icon: <Globe className="w-6 h-6 text-hex-gold" />,
-      title: "全球 CDN 分发",
-      desc: "依托分布式节点部署技术，将您的官网内容分发至全球边缘节点，实现毫秒级加载速度。"
-    },
-    {
-      icon: <Smartphone className="w-6 h-6 text-hex-gold" />,
-      title: "全端完美适配",
-      desc: "深度优化的响应式框架，完美支持 iOS、Android 移动端及 PC 端浏览器展示。"
-    },
-    {
-      icon: <Languages className="w-6 h-6 text-hex-gold" />,
-      title: "双语自适应",
-      desc: "内置中/英双语切换引擎，助力项目无缝走向国际化市场。"
+    cn: {
+      title: "核心服务",
+      subtitle: "极速官网构建协议",
+      description: "HEX 平台内嵌了先进的 AI 构建引擎，该引擎能够深度解析您的项目参数，自动编写并优化前端代码。您无需任何编程基础，无需购买昂贵的服务器，即可获得一套企业级的 Web3 官网解决方案。",
+      benefits: [
+        {
+          title: "AI 构建引擎",
+          desc: "摒弃传统模板堆砌，采用 AI 驱动的自动化逻辑，确保代码结构严谨、运行高效。"
+        },
+        {
+          title: "全球 CDN 分发",
+          desc: "依托分布式节点部署技术，将您的官网内容分发至全球边缘节点，实现毫秒级加载速度。"
+        },
+        {
+          title: "全端完美适配",
+          desc: "深度优化的响应式框架，完美支持 iOS、Android 移动端及 PC 端浏览器展示。"
+        },
+        {
+          title: "双语自适应",
+          desc: "内置中/英双语切换引擎，助力项目无缝走向国际化市场。"
+        }
+      ],
+      status: "状态: 在线",
+      uptime: "运行稳定"
     }
+  };
+
+  const icons = [
+    <Cpu className="w-6 h-6 text-hex-gold" />,
+    <Globe className="w-6 h-6 text-hex-gold" />,
+    <Smartphone className="w-6 h-6 text-hex-gold" />,
+    <Languages className="w-6 h-6 text-hex-gold" />
   ];
 
   return (
@@ -31,17 +73,21 @@ export const CoreServices: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              核心服务
+              {content[lang].title}
             </h2>
-            <h3 className="text-2xl font-semibold text-gray-200 mb-4">极速官网构建协议</h3>
+            <h3 className="text-2xl font-semibold text-gray-200 mb-4">{content[lang].subtitle}</h3>
             <p className="text-gray-400 mb-8 leading-relaxed">
-              HEX 平台内嵌了先进的 <strong>🧩 AI 构建引擎</strong>，该引擎能够深度解析您的项目参数，自动编写并优化前端代码。您无需任何编程基础，无需购买昂贵的服务器，即可获得一套企业级的 Web3 官网解决方案。
+              {lang === 'en' ? (
+                <>HEX platform embeds an advanced <strong>🧩 AI Build Engine</strong> that deeply analyzes your project parameters to automatically write and optimize frontend code. No programming skills required, no expensive servers needed.</>
+              ) : (
+                <>HEX 平台内嵌了先进的 <strong>🧩 AI 构建引擎</strong>，该引擎能够深度解析您的项目参数，自动编写并优化前端代码。您无需任何编程基础，无需购买昂贵的服务器，即可获得一套企业级的 Web3 官网解决方案。</>
+              )}
             </p>
             
             <div className="grid sm:grid-cols-2 gap-6">
-              {benefits.map((item, idx) => (
+              {content[lang].benefits.map((item, idx) => (
                 <div key={idx} className="bg-hex-bg border border-gray-800 p-5 rounded-lg hover:border-hex-gold/50 transition-colors">
-                  <div className="mb-3">{item.icon}</div>
+                  <div className="mb-3">{icons[idx]}</div>
                   <h4 className="text-lg font-bold text-white mb-2">{item.title}</h4>
                   <p className="text-sm text-gray-400">{item.desc}</p>
                 </div>
@@ -56,20 +102,15 @@ export const CoreServices: React.FC = () => {
                <svg className="w-full h-auto drop-shadow-2xl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                   <style>
                     {`
-                    /* 定义加载动画：透明度从高到低变化 */
                     @keyframes triangle-load {
                       0% { opacity: 1; fill: #F0B90B; }
                       100% { opacity: 0.1; fill: #F0B90B; }
                     }
-                    
-                    /* 应用动画到每个三角形 */
                     .loader-tri {
-                      fill: #F0B90B; /* 基础填充色 */
-                      opacity: 0.1;  /* 默认低透明度 */
+                      fill: #F0B90B;
+                      opacity: 0.1;
                       animation: triangle-load 1.2s infinite ease-in-out;
                     }
-
-                    /* 为每个三角形设置延迟，形成旋转效果 */
                     .t1 { animation-delay: 0s; }
                     .t2 { animation-delay: 0.2s; }
                     .t3 { animation-delay: 0.4s; }
@@ -109,8 +150,8 @@ export const CoreServices: React.FC = () => {
              </div>
 
              <div className="absolute -bottom-6 -right-6 bg-hex-card p-4 rounded-xl border border-hex-gold/30 shadow-lg hidden md:block">
-               <div className="text-hex-gold font-mono text-sm">状态: 在线</div>
-               <div className="text-white font-bold text-xl">运行稳定</div>
+               <div className="text-hex-gold font-mono text-sm">{content[lang].status}</div>
+               <div className="text-white font-bold text-xl">{content[lang].uptime}</div>
              </div>
           </div>
         </div>

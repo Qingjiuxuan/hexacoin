@@ -1,17 +1,36 @@
 import React from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { useState } from 'react';
+import { Language } from '../types';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  lang: Language;
+  setLang: (lang: Language) => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ lang, setLang }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
-    { name: '核心服务', href: '#services' },
-    { name: '功能亮点', href: '#features' },
-    { name: '启动指南', href: '#guide' },
-    { name: '代币经济', href: '#tokenomics' },
-    { name: '安全审计', href: '#audit' },
-  ];
+  const navLinks = {
+    en: [
+      { name: 'Core Services', href: '#services' },
+      { name: 'Features', href: '#features' },
+      { name: 'How to Launch', href: '#guide' },
+      { name: 'Tokenomics', href: '#tokenomics' },
+      { name: 'Audit', href: '#audit' },
+    ],
+    cn: [
+      { name: '核心服务', href: '#services' },
+      { name: '功能亮点', href: '#features' },
+      { name: '启动指南', href: '#guide' },
+      { name: '代币经济', href: '#tokenomics' },
+      { name: '安全审计', href: '#audit' },
+    ]
+  };
+
+  const toggleLang = () => {
+    setLang(lang === 'cn' ? 'en' : 'cn');
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-hex-bg/90 backdrop-blur-md border-b border-hex-card">
@@ -38,7 +57,7 @@ export const Navbar: React.FC = () => {
           
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.map((link) => (
+              {navLinks[lang].map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
@@ -51,8 +70,12 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden md:block">
-            <button className="bg-hex-gold hover:bg-hex-goldHover text-black px-6 py-2 rounded-full font-bold text-sm transition-transform hover:scale-105">
-              启动应用
+            <button 
+              onClick={toggleLang}
+              className="flex items-center gap-2 bg-hex-gold hover:bg-hex-goldHover text-black px-6 py-2 rounded-full font-bold text-sm transition-transform hover:scale-105"
+            >
+              <Globe className="w-4 h-4" />
+              {lang === 'cn' ? 'English' : '中文'}
             </button>
           </div>
 
@@ -71,7 +94,7 @@ export const Navbar: React.FC = () => {
       {isOpen && (
         <div className="md:hidden bg-hex-card border-b border-gray-700">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
+            {navLinks[lang].map((link) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -81,8 +104,15 @@ export const Navbar: React.FC = () => {
                 {link.name}
               </a>
             ))}
-            <button className="w-full text-center bg-hex-gold text-black mt-4 px-6 py-3 rounded-md font-bold">
-              启动应用
+            <button 
+              onClick={() => {
+                toggleLang();
+                setIsOpen(false);
+              }}
+              className="w-full flex items-center justify-center gap-2 bg-hex-gold text-black mt-4 px-6 py-3 rounded-md font-bold"
+            >
+              <Globe className="w-4 h-4" />
+              {lang === 'cn' ? 'Switch to English' : '切换至中文'}
             </button>
           </div>
         </div>

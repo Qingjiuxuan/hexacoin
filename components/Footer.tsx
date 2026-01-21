@@ -1,7 +1,23 @@
 import React from 'react';
 import { Send, Twitter } from 'lucide-react';
+import { Language } from '../types';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  lang: Language;
+}
+
+export const Footer: React.FC<FooterProps> = ({ lang }) => {
+  const content = {
+    en: {
+      support: "Community & Service",
+      copyright: "All rights reserved."
+    },
+    cn: {
+      support: "社区与服务",
+      copyright: "版权所有。"
+    }
+  };
+
   return (
     <footer className="bg-black py-12 border-t border-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +43,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="text-center md:text-left">
-            <h4 className="text-white font-bold mb-4">社区与服务</h4>
+            <h4 className="text-white font-bold mb-4">{content[lang].support}</h4>
             <div className="flex space-x-6">
               <a href="#" className="flex items-center gap-2 text-gray-400 hover:text-hex-gold transition-colors">
                 <div className="p-2 bg-gray-800 rounded-full group-hover:bg-hex-gold">
@@ -45,7 +61,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} HEX Ecosystem.<br/>版权所有。
+            &copy; {new Date().getFullYear()} HEX Ecosystem.<br/>{content[lang].copyright}
           </div>
         </div>
       </div>
