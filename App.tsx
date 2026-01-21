@@ -8,9 +8,11 @@ import { Guide } from './components/Guide';
 import { Tokenomics } from './components/Tokenomics';
 import { Audit } from './components/Audit';
 import { Footer } from './components/Footer';
+import { Language } from './types';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [lang, setLang] = useState<Language>('cn');
 
   useEffect(() => {
     // Simulate loading time for the entrance animation (Rotate and Enter)
@@ -34,16 +36,16 @@ function App() {
 
       {/* Main Content */}
       <div className={`transition-opacity duration-1000 ${loading ? 'opacity-0' : 'opacity-100'}`}>
-        <Navbar />
+        <Navbar lang={lang} setLang={setLang} />
         <main>
-          <Hero />
-          <CoreServices />
-          <Features />
-          <Guide />
-          <Tokenomics />
-          <Audit />
+          <Hero lang={lang} />
+          <CoreServices lang={lang} />
+          <Features lang={lang} />
+          <Guide lang={lang} />
+          <Tokenomics lang={lang} />
+          <Audit lang={lang} />
         </main>
-        <Footer />
+        <Footer lang={lang} />
       </div>
     </div>
   );
