@@ -10,14 +10,14 @@ export const Hero: React.FC<HeroProps> = ({ lang }) => {
   const content = {
     en: {
       badge: "Web3 Website Launchpad",
-      title: "Build Your Web3 Identity In One Click",
+      title: "Build Your Official Web3 Website In One Click",
       desc: "HEX platform redefines Web3 project launches. Powered by our Intelligent Build Engine, get an enterprise-grade official website without coding.",
       launchBtn: "Launch Now (0.02 BNB)",
       docsBtn: "Read Docs"
     },
     cn: {
       badge: "Web3 官网发射台",
-      title: "一键构建您的 Web3 数字身份",
+      title: "一键构建您的 Web3 官网",
       desc: "HEX 平台重新定义了 Web3 项目的启动标准。我们内嵌了先进的智能构建引擎，为您提供企业级的 Web3 官网解决方案，无需任何编程基础。",
       launchBtn: "立即启动 (0.02 BNB)",
       docsBtn: "查看文档"
@@ -37,9 +37,9 @@ export const Hero: React.FC<HeroProps> = ({ lang }) => {
         
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
           {lang === 'en' ? (
-            <>Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-hex-gold to-yellow-200">Web3 Identity</span> In One Click</>
+            <>Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-hex-gold to-yellow-200">Web3 Official Site</span> In One Click</>
           ) : (
-            <>一键构建您的 <span className="text-transparent bg-clip-text bg-gradient-to-r from-hex-gold to-yellow-200">Web3 数字身份</span></>
+            <>一键构建您的 <span className="text-transparent bg-clip-text bg-gradient-to-r from-hex-gold to-yellow-200">Web3 官方网站</span></>
           )}
         </h1>
         
